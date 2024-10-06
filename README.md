@@ -70,8 +70,8 @@ The project is structured as follows:
 ```
 /src
   /components
-    - UserStats.js        // Main component that fetches and displays user data
-    - LoadingSpinner.js    // A beautiful loading spinner component
+    - Dashboard.js        // Main component that fetches and displays user data
+    - Problem Reccomender.js    // Problem Reccommender
   App.js                  // Main app file
   index.js                // Entry point of the React application
   App.css                 // Tailwind CSS configuration
