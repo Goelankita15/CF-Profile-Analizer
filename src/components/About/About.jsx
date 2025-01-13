@@ -43,8 +43,7 @@ const About = () => {
 
       <h2 className="text-2xl font-bold mt-4 mb-2">Get Started!</h2>
       <p className="mb-4 text-gray-700">
-        Ready to dive into your Codeforces stats?
-        <a className= 'text-blue-800' href="/dashboard"> Click here</a>
+        Ready to dive into your Codeforces stats? Go to Dashboard.
       </p>
     </div>
   );
