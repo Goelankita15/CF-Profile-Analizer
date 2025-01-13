@@ -35,6 +35,7 @@ const UserStats = () => {
       const problemsSolvedByRating = {};
       const unsolvedProblem = [];
       const solvedProblems = new Set();
+      const unsolvedProblems = new Set();
       
       // console.log(submissions);
       submissions.forEach((submission) => {
@@ -51,12 +52,13 @@ const UserStats = () => {
         }
       });
        
-      const unsolvedProblems=unsolvedProblem.filter(problem => !solvedProblems.has(problem));
+      const temp=unsolvedProblem.filter(problem => !solvedProblems.has(problem));
+      temp.forEach((problem) => { unsolvedProblems.add(problem); });
       const acceptedProblemsCount = submissions.filter(sub => sub.verdict === 'OK').length;
       const acceptanceRate = (acceptedProblemsCount / submissions.length) * 100;
 
       const unsolvedProblemList = Array.from(unsolvedProblems).map((problem) => {
-        console.log(problem);
+        // console.log(problem);
         const [contestId, index, name] = problem.split('_');
         return { contestId, index, name };
       });
