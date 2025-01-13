@@ -11,7 +11,7 @@ const UserStats = () => {
   const fetchUserData = async (handle) => {
     setLoading(true);
     setError(null);
-
+    // console.log(handle);
     try {
       const userStatusResponse = await fetch(`https://codeforces.com/api/user.status?handle=${handle}&lang=en`);
       const userInfoResponse = await fetch(`https://codeforces.com/api/user.info?handles=${handle}&lang=en`);
@@ -29,27 +29,34 @@ const UserStats = () => {
 
       const submissions = statusData.result;
       const userInfo = infoData.result[0];
-
+       
+      // console.log(userInfo);
       const problemsSolvedByTag = {};
       const problemsSolvedByRating = {};
-      const unsolvedProblems = new Set();
-
+      const unsolvedProblem = [];
+      const solvedProblems = new Set();
+      
+      // console.log(submissions);
       submissions.forEach((submission) => {
         if (submission.verdict === 'OK') {
           const { tags, rating } = submission.problem;
           tags.forEach((tag) => {
             problemsSolvedByTag[tag] = (problemsSolvedByTag[tag] || 0) + 1;
           });
+          solvedProblems.add(`${submission.problem.contestId}_${submission.problem.index}_${submission.problem.name}`);
           problemsSolvedByRating[rating] = (problemsSolvedByRating[rating] || 0) + 1;
         } else {
-          unsolvedProblems.add(`${submission.problem.contestId}_${submission.problem.index}_${submission.problem.name}`);
+          // console.log(submission.verdict);
+          unsolvedProblem.push(`${submission.problem.contestId}_${submission.problem.index}_${submission.problem.name}`);
         }
       });
-
+       
+      const unsolvedProblems=unsolvedProblem.filter(problem => !solvedProblems.has(problem));
       const acceptedProblemsCount = submissions.filter(sub => sub.verdict === 'OK').length;
       const acceptanceRate = (acceptedProblemsCount / submissions.length) * 100;
 
       const unsolvedProblemList = Array.from(unsolvedProblems).map((problem) => {
+        console.log(problem);
         const [contestId, index, name] = problem.split('_');
         return { contestId, index, name };
       });
