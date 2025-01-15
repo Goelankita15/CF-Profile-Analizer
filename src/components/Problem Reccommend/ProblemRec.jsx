@@ -23,9 +23,9 @@ const ProblemRec = () => {
 
         try {
             // Fetch submission history from Codeforces API
-            const response = await fetch(`https://codeforces.com/api/user.status?handle=${handle}`);
+            const response = await fetch(`https://codeforces.com/api/user.status?handle=${handle}&lang=en`);
             const data = await response.json();
-
+            // console.log(data);
             if (data.status !== 'OK') {
                 setLoading(false);
                 setError('Error fetching submission history. Please check the Codeforces handle.');

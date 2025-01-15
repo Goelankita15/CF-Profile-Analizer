@@ -91,7 +91,7 @@ const UserStats = () => {
   const renderCharts = () => {
     if (!userData) return null;
 
-    const tagData = Object.entries(userData.problemsSolvedByTag).map(([tag, count]) => ({ name: tag, value: count }));
+    const tagData = Object.entries(userData.problemsSolvedByTag).map(([tag, count]) => ({ name: tag, value: count}));
     const ratingData = Object.entries(userData.problemsSolvedByRating).map(([rating, count]) => ({ name: rating, value: count }));
 
     const colors = ['#8884d8', '#82ca9d', '#ffc658', '#ff8042', '#8dd1e1', '#a4de6c', '#d084b5', '#ff6565'];
